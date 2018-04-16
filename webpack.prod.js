@@ -6,17 +6,7 @@ const common = require('./webpack.common.js');
 module.exports = merge(common, {
   mode: 'production',
   optimization: {
-    minimize: true,
-    /*splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'initial',
-          enforce: true
-        }
-      }
-    }*/
+    minimize: true
   },
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin(),
