@@ -8,7 +8,8 @@ const APP_DIR = resolve(__dirname, 'src');
 
 module.exports = {
   entry: {
-    react: ['react', 'react-dom', 'react-router-dom'],
+    react: ['react', 'react-dom', 'prop-types'],
+    router: ['react-router-dom', 'history'],
     app: ['babel-polyfill', `${APP_DIR}/index.jsx`]
   },
   output: {
@@ -36,6 +37,12 @@ module.exports = {
         react: {
           test: 'react',
           name: 'react',
+          chunks: 'initial',
+          enforce: true
+        },
+        router: {
+          test: 'router',
+          name: 'router',
           chunks: 'initial',
           enforce: true
         }
