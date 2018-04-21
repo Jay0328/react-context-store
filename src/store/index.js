@@ -20,10 +20,7 @@ export class Provider extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      ...initialState,
-      dispatch: this.dispatch
-    };
+    this.state = { ...initialState };
   }
 
   dispatch = (action, getState = () => this.state) => {
@@ -33,19 +30,27 @@ export class Provider extends PureComponent {
       action(this.dispatch, getState);
     }
     else {
-      Object
+      const newState = Object
         .keys(reducers)
-        .forEach(r => {
-          this.setState({
-            [r]: reducers[r](this.state[r], action)
-          });
-        });
+        .reduce((ret, r) => ({
+          ...ret,
+          [r]: reducers[r](this.state[r], action)
+        }), {});
+      this.setState({
+        ...this.state,
+        ...newState
+      });
     }
   }
 
   render() {
+    const { state, dispatch } = this;
+    const store = {
+      ...state,
+      dispatch
+    };
     return (
-      <Context.Provider value={this.state}>
+      <Context.Provider value={store}>
         {this.props.children}
       </Context.Provider>
     );
