@@ -69,5 +69,6 @@ export const connect = (Component, { mapStateToProps, mapDispatchToProps }) => {
       )}
     </Consumer>
   );
+  ConnectComponent.displayName = `Connect(${Component.displayName || Component.name || 'Component'})`;
   return ConnectComponent;
 };
